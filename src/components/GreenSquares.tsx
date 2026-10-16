@@ -8,6 +8,7 @@ import { createGame, press, release, scoreOf, step, type Game, type Level } from
 const HEIGHT = 180;
 const BEST_KEY = "green-squares-best";
 const GRAPH_CELLS = 7 * 20; // seven rows like GitHub's graph, newest squares on the right
+const RESTART_DELAY_MS = 600; // presses right after a crash are ignored, so mashing jump doesn't skip the result
 
 type Colors = { fg: string; muted: string; line: string; danger: string; levels: [string, string, string, string] };
 
@@ -156,6 +157,7 @@ export default function GreenSquares({ autoFocus = false }: { autoFocus?: boolea
   const paused = useRef(false);
   const frame = useRef(0);
   const last = useRef(0);
+  const overAt = useRef(0);
   const [collected, setCollected] = useState<Level[]>([]);
   const [announce, setAnnounce] = useState("");
 
@@ -228,6 +230,7 @@ export default function GreenSquares({ autoFocus = false }: { autoFocus?: boolea
     for (const e of step(g, dt)) {
       if (e.type === "collect") setCollected((list) => [...list, e.level].slice(-GRAPH_CELLS));
       if (e.type === "over") {
+        overAt.current = performance.now();
         saveBest(g.best);
         setAnnounce(`Build failed. Score ${e.score}. Best ${g.best}.`);
       }
@@ -239,6 +242,7 @@ export default function GreenSquares({ autoFocus = false }: { autoFocus?: boolea
   function onPress() {
     const g = game.current;
     if (!g) return;
+    if (g.phase === "over" && performance.now() - overAt.current < RESTART_DELAY_MS) return;
     if (paused.current) {
       paused.current = false;
     } else {
