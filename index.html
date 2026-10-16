@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Zirk Eins B. Layupan. Data analyst, web developer, aspiring AI engineer." />
+    <meta name="theme-color" content="#101114" />
+    <title>Eins Layupan</title>
+    <!-- Apply a saved theme before first paint so the page never flashes the other one. Same key as ThemeToggle. -->
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Link previews (LinkedIn, Messenger, X). These scrapers don't run JavaScript, so the tags live here. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Zirk Eins B. Layupan" />
+    <meta property="og:description" content="Data analyst, web developer, aspiring AI engineer. Projects, certifications and contact." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Zirk Eins B. Layupan" />
+    <meta name="twitter:description" content="Data analyst, web developer, aspiring AI engineer. Projects, certifications and contact." />
+    <!-- Once the site has its final address, add these (they need the full https:// URL):
+    <meta property="og:url" content="https://YOUR-DOMAIN/" />
+    <meta property="og:image" content="https://YOUR-DOMAIN/photo.jpg" />
+    <meta name="twitter:image" content="https://YOUR-DOMAIN/photo.jpg" />
+    -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..700&family=IBM+Plex+Mono:wght@400&display=swap" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
