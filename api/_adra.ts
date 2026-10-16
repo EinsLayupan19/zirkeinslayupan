@@ -4,7 +4,7 @@
 //
 // Same rules as InsightFlow's GeminiProvider: the key travels in the x-goog-api-key header, never the URL;
 // errors never echo the key or Google's raw response; one retry when Gemini says it is busy.
-import { achievements, certificates, links, profile, projects, stack } from "../src/data";
+import { about, achievements, certificates, links, profile, projects, stack } from "../src/data";
 
 export type AdraEnv = { GEMINI_API_KEY?: string; GEMINI_MODEL?: string };
 type Link = { label: string; href: string };
@@ -44,6 +44,7 @@ function knownLinks(): Map<string, string> {
   if (links.email) add(`mailto:${links.email}`, "Email");
   add(links.linkedin, "LinkedIn");
   add(links.github, "GitHub");
+  add("/about", "About Eins");
   add(links.resume, "Résumé");
   for (const p of projects) {
     add(p.demo, `${p.title} live site`);
@@ -59,6 +60,9 @@ function systemPrompt(allowed: Map<string, string>): string {
     name: profile.name,
     roles: profile.roles,
     about: profile.bio,
+    education: about.education,
+    story: about.story.length ? about.story : undefined,
+    hobbies: about.hobbies.length ? about.hobbies : undefined,
     availability: profile.availability || undefined,
     projects: projects.map((p) => ({
       title: p.title,

@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { ask, suggestions, type Answer, type Reply } from "../adra";
+import Link from "./Link";
 
 type Msg = { id: number; from: "adra" | "me"; text: string; links?: Reply["links"] };
 
@@ -82,11 +83,17 @@ export default function Adra() {
                 <p>{m.text}</p>
                 {m.links?.length ? (
                   <div className="adra-links">
-                    {m.links.map((l) => (
-                      <a href={l.href} target="_blank" rel="noopener noreferrer" key={l.href}>
-                        {l.label}
-                      </a>
-                    ))}
+                    {m.links.map((l) =>
+                      l.href.startsWith("/") ? (
+                        <Link href={l.href} key={l.href}>
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a href={l.href} target="_blank" rel="noopener noreferrer" key={l.href}>
+                          {l.label}
+                        </a>
+                      )
+                    )}
                   </div>
                 ) : null}
               </div>

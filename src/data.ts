@@ -7,7 +7,7 @@ export const profile = {
   photoAlt: "Portrait of Zirk Eins B. Layupan, smiling, holding a whiteboard and a computer mouse",
   bio: [
     "I build practical software, AI-powered tools, and data-driven systems.",
-    "I'm a third-year BSIT student at Northeastern University Philippines. I work on full-stack applications, AI automation, and data analytics, mostly personal and community projects.",
+    "I'm a third-year BSIT student at New Era University. I work on full-stack applications, AI automation, and data analytics, mostly personal and community projects.",
     "I'd rather show a working project than describe one.",
   ],
   /** One line under your name, e.g. "Open to internships, 2026". Leave empty to hide it. */
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     description: "AI School Information Assistant",
     summary:
       "A school helpdesk where students ask in plain language about procedures, class schedules, the academic calendar and announcements, and get pointed to the right office.",
-    tech: ["React", "TypeScript", "Tailwind", "Node.js", "Supabase", "pgvector", "Gemini"],
+    tech: ["React", "TypeScript", "Tailwind", "Node.js", "Express", "Supabase", "Gemini"],
     categories: ["web", "ai"],
     repo: "https://github.com/EinsLayupan19/ai-powered-helpdesk",
   },
@@ -156,26 +156,54 @@ export const certificates: Certificate[] = [
   },
 ];
 
-export const stack: string[] = [
-  "Python",
-  "SQL",
-  "TypeScript",
-  "JavaScript",
-  "React",
-  "Vite",
-  "Tailwind",
-  "Node.js",
-  "Express",
-  "FastAPI",
-  "DuckDB",
-  "SQLite",
-  "MongoDB",
-  "Supabase",
-  "pgvector",
-  "Gemini API",
-  "OpenAI API",
-  "Ollama",
-  "n8n",
-  "Vercel",
-  "GitHub",
+// Your tools, grouped by kind. The home page shows them as one list (`stack`).
+export const stackGroups: { label: string; items: string[] }[] = [
+  { label: "Languages", items: ["Python", "SQL", "TypeScript", "JavaScript"] },
+  { label: "Frontend", items: ["React", "Vite", "Tailwind"] },
+  { label: "Backend", items: ["Node.js", "Express", "FastAPI"] },
+  { label: "Data", items: ["DuckDB", "SQLite", "MongoDB", "Supabase"] },
+  { label: "AI and automation", items: ["Gemini API", "OpenAI API", "Ollama", "n8n"] },
+  { label: "Shipping", items: ["Vercel", "GitHub"] },
 ];
+
+export const stack: string[] = stackGroups.flatMap((g) => g.items);
+
+// The About page (/about). Sections with an empty list stay hidden, so add only what is true.
+export type Hobby = {
+  name: string;
+  /** Optional one line, e.g. what you like about it or how long you've done it. */
+  detail?: string;
+  /** Your main one: shown wider, first. */
+  main?: boolean;
+};
+
+export type About = {
+  education: { program: string; school: string; year: string };
+  /** A few short paragraphs in your own words: how you got into tech, what you enjoy, what you want to do next. */
+  story: string[];
+  /** One line above the hobbies. */
+  hobbiesIntro?: string;
+  hobbies: Hobby[];
+};
+
+// The About page (/about) is about you, not your work: bio, your story, hobbies.
+// "My story" and "Hobbies" stay hidden until you add something, so only add what is true.
+export const about: About = {
+  education: {
+    program: "BS Information Technology",
+    school: "New Era University",
+    year: "Third year",
+  },
+  story: [
+    "I got into tech because of my uncle. He works in the field, and seeing how much he enjoys his job, and how well it pays, showed me what I wanted for myself: work I enjoy that also pays well.",
+    "Now that I'm studying IT, I really enjoy creating systems.",
+  ],
+  hobbiesIntro: "I'm a sporty person and play almost every sport.",
+  hobbies: [
+    { name: "Basketball", detail: "I played varsity in senior high school at AMA Fairview.", main: true },
+    { name: "Badminton", detail: "I play a lot." },
+    { name: "Baseball" },
+    { name: "Volleyball" },
+    { name: "Soccer" },
+  ],
+};

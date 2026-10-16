@@ -1,7 +1,7 @@
 // Adra's brain in the browser. `ask()` sends the conversation to /api/adra (Gemini, see api/_adra.ts).
 // When that isn't available (no API key set, offline, rate-limited) she falls back to `reply()`:
 // keyword matching over the site's own data in data.ts, so she only says things already on the page.
-import { achievements, categories, certificates, links, profile, projects, stack } from "./data";
+import { about, achievements, categories, certificates, links, profile, projects, stack } from "./data";
 
 export type Reply = { text: string; links?: { label: string; href: string }[] };
 
@@ -66,6 +66,13 @@ export async function reply(input: string): Promise<Reply> {
   if (has(q, /^(hi|hello|hey|yo|kumusta|hola)\b/))
     return { text: "Hi, I'm Adra. I can tell you about Eins's projects, tech stack, certifications and contact details." };
 
+  if (about.hobbies.length && has(q, /hobb|sport|basketball|badminton|volleyball|soccer|baseball|free time|fun|outside of/)) {
+    // Names only: the details in data.ts are written in first person, and the About page shows them in full.
+    const names = about.hobbies.map((h) => (h.main ? `${h.name} (his favorite)` : h.name));
+    const list = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : names[0];
+    return { text: `Eins's hobbies: ${list}. There's more on his About page.`, links: [{ label: "About Eins", href: "/about" }] };
+  }
+
   if (has(q, /achiev|award|win|won|capstone|recogni/)) {
     if (!achievements.length) return { text: "No achievements listed yet." };
     return { text: achievements.map((a) => `${a.title}${a.detail ? ` (${a.detail})` : ""}`).join(". ") + "." };
@@ -106,7 +113,10 @@ export async function reply(input: string): Promise<Reply> {
   }
 
   if (has(q, /who|about|eins|name|student|school|study|yourself|role/))
-    return { text: `${profile.name}: ${profile.roles.join(", ")}. A third-year BSIT student at Northeastern University Philippines who works on full-stack apps, AI automation and data analytics.` };
+    return {
+      text: `${profile.name}: ${profile.roles.join(", ")}. ${about.education.year} ${about.education.program} student at ${about.education.school} who works on full-stack apps, AI automation and data analytics.`,
+      links: [{ label: "About Eins", href: "/about" }],
+    };
 
   if (has(q, /adra|you|bot|ai|real/))
     return { text: "I'm Adra, the assistant on Eins's site. Right now I'm answering from this site's content." };

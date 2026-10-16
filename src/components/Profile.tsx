@@ -1,18 +1,8 @@
-import { useLayoutEffect, useRef, useState } from "react";
 import { links, profile } from "../data";
-import { ChevronDown } from "./Icons";
+import { ArrowRight } from "./Icons";
+import Link from "./Link";
 
 export default function Profile() {
-  const [expanded, setExpanded] = useState(false);
-  const bioRef = useRef<HTMLDivElement>(null);
-
-  // Animate the height between the faded preview and the full bio.
-  useLayoutEffect(() => {
-    const el = bioRef.current;
-    if (!el) return;
-    el.style.maxHeight = expanded ? `${el.scrollHeight}px` : "";
-  }, [expanded]);
-
   return (
     <header className="profile">
       <figure className="avatar">
@@ -20,7 +10,7 @@ export default function Profile() {
       </figure>
 
       <div className="id">
-        <h1 className="name">{profile.name}</h1>
+        <h1 className="name" tabIndex={-1}>{profile.name}</h1>
         <p className="rotator" aria-label={profile.roles.join(", ")}>
           {profile.roles.map((role) => (
             <span className="r" aria-hidden="true" key={role}>
@@ -40,16 +30,17 @@ export default function Profile() {
         ) : null}
       </div>
 
-      <div className="bio-wrap" id="about">
-        <div ref={bioRef} className={`bio${expanded ? "" : " collapsed"}`} id="bio">
+      {/* A faded preview of the bio; the full story is on /about. */}
+      <div className="bio-wrap">
+        <div className="bio collapsed">
           {profile.bio.map((line) => (
             <p key={line}>{line}</p>
           ))}
         </div>
-        <button className="more" type="button" aria-expanded={expanded} aria-controls="bio" onClick={() => setExpanded((v) => !v)}>
-          <ChevronDown />
-          <span>{expanded ? "Show less" : "More about me"}</span>
-        </button>
+        <Link className="more" href="/about">
+          <span>More about me</span>
+          <ArrowRight />
+        </Link>
       </div>
     </header>
   );

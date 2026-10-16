@@ -1,14 +1,15 @@
 import { links, projects } from "../data";
 import { ArrowUpRight } from "./Icons";
+import Link from "./Link";
 
 export default function Stats() {
   return (
     <div className="stats" aria-label="At a glance">
-      <a className="stat" href="#about">
+      <Link className="stat" href="/about">
         <span className="n">3rd yr</span>
         <span className="l">BSIT student</span>
         <ArrowUpRight />
-      </a>
+      </Link>
       <a className="stat" href="#work">
         <span className="n">{projects.length}</span>
         <span className="l">Featured projects</span>
