@@ -8,6 +8,8 @@ import Certificates from "./components/Certificates";
 import Stack from "./components/Stack";
 import Footer from "./components/Footer";
 import ContactPage from "./components/ContactPage";
+import PlayPage from "./components/PlayPage";
+import GreenSquares from "./components/GreenSquares";
 import Adra from "./components/Adra";
 import AboutPage from "./components/AboutPage";
 import Link from "./components/Link";
@@ -19,6 +21,7 @@ const TITLES: Record<Route, string> = {
   home: "Eins Layupan",
   about: "About | Eins Layupan",
   contact: "Contact | Eins Layupan",
+  play: "Green Squares | Eins Layupan",
   notfound: "Page not found | Eins Layupan",
 };
 
@@ -55,12 +58,16 @@ export default function App() {
         <AboutPage />
       ) : route === "contact" ? (
         <ContactPage />
+      ) : route === "play" ? (
+        <PlayPage />
       ) : (
         <div className="notfound">
           <h1 tabIndex={-1}>Page not found</h1>
           <p>
             That page doesn't exist. Go to the <Link href="/">portfolio</Link>, the <Link href="/about">About page</Link> or the <Link href="/contact">Contact page</Link>.
           </p>
+          <p className="notfound-play">While you're here, play a round of Green Squares.</p>
+          <GreenSquares />
         </div>
       )}
       <Footer />

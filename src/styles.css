@@ -502,3 +502,25 @@ h1[tabindex="-1"]:focus { outline: none; }
 .contact-done .t { margin: 0; font-size: 18px; font-weight: 500; }
 .contact-done .d { margin: 4px 0 12px; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
 .contact-again { padding: 0; min-height: 44px; font: inherit; font-size: 14px; color: var(--fg); background: none; border: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* screen-reader-only text (announcements) */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Green Squares game */
+.play-head { margin-bottom: 20px; }
+.play-lead { margin: 12px 0 0; max-width: 56ch; font-size: clamp(16px, 4.2vw, 18px); line-height: 1.55; color: var(--muted); }
+.play-keys { margin: 8px 0 0; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.notfound-play { margin: 28px 0 12px; }
+.gs { display: grid; gap: 12px; }
+.gs-stage {
+  position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+  cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation;
+}
+.gs-stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.gs-stage canvas { display: block; }
+.gs-graph { --cell: 10px; display: grid; grid-template-rows: repeat(7, var(--cell)); grid-auto-flow: column; grid-auto-columns: var(--cell); gap: 3px; justify-content: start; }
+.gs-graph .cell[data-g="1"] { background: color-mix(in srgb, var(--c-ai-label) 35%, var(--bg)); }
+.gs-graph .cell[data-g="2"] { background: color-mix(in srgb, var(--c-ai-label) 55%, var(--bg)); }
+.gs-graph .cell[data-g="3"] { background: color-mix(in srgb, var(--c-ai-label) 78%, var(--bg)); }
+.gs-graph .cell[data-g="4"] { background: var(--c-ai-label); }
+.gs-count { margin: 0; font-family: var(--mono); font-size: 11px; color: var(--muted); }

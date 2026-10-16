@@ -1,4 +1,5 @@
 import { links, profile } from "../data";
+import Link from "./Link";
 
 export default function Footer() {
   return (
@@ -16,6 +17,9 @@ export default function Footer() {
         </li>
         <li>
           {links.email ? <a href={`mailto:${links.email}`} title={links.email}>Email</a> : <span className="pending">Email</span>}
+        </li>
+        <li>
+          <Link href="/play">Play</Link>
         </li>
         {links.resume ? (
           <li>

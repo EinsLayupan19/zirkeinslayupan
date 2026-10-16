@@ -1,14 +1,15 @@
-// A tiny router for the pages: "/", "/about" and "/contact". No library needed. Deep links work on Vercel through the
+// A tiny router for the pages: "/", "/about", "/contact" and "/play". No library needed. Deep links work on Vercel through the
 // rewrite in vercel.json, and in `npm run dev` / `npm run preview` through Vite's built-in SPA fallback.
 import { useEffect, useState } from "react";
 
-export type Route = "home" | "about" | "contact" | "notfound";
+export type Route = "home" | "about" | "contact" | "play" | "notfound";
 
 export function routeOf(pathname: string): Route {
   const p = pathname.replace(/\/+$/, "") || "/";
   if (p === "/") return "home";
   if (p === "/about") return "about";
   if (p === "/contact") return "contact";
+  if (p === "/play") return "play";
   return "notfound";
 }
 
