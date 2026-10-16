@@ -21,7 +21,8 @@ Everything lives in `src/data.ts`:
 - `about`: the About page (`/about`), which is about you, not your work. Add `story` paragraphs and `hobbies` (`{ name, detail? }`); each section stays hidden until it has something
 
 ## Pages
-`/` (portfolio), `/about` and `/contact` (ways to reach you plus the contact form). Navigation is in
+`/` (portfolio), `/about`, `/contact` (ways to reach you plus the contact form) and `/play` (Green Squares, a
+small runner game, also shown on the Page not found page; logic in `src/game/engine.ts`). Navigation is in
 `src/components/Nav.tsx`; routing is the small `src/router.ts` (no library). `vercel.json` sends every non-API path to
 the app so `/about` and `/contact` work when opened directly.
 
