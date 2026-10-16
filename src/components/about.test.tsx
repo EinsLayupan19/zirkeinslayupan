@@ -50,10 +50,10 @@ describe("About page", () => {
     for (const a of achievements) expect(html).not.toContain(escaped(a.title));
   });
 
-  it("hides My story and Hobbies while they are empty", () => {
+  it("hides My story and Outside of code while they are empty", () => {
     const empty = renderToStaticMarkup(<AboutPage content={{ ...about, story: [], hobbies: [] }} />);
     expect(empty).not.toContain("My story");
-    expect(empty).not.toContain("Hobbies");
+    expect(empty).not.toContain("Outside of code");
   });
 
   it("shows your story and hobbies once you add them", () => {
@@ -62,7 +62,7 @@ describe("About page", () => {
     );
     expect(filled).toContain("My story");
     expect(filled).toContain("Sample paragraph.");
-    expect(filled).toContain("Hobbies");
+    expect(filled).toContain("Outside of code");
     expect(filled).toContain("Sample hobby");
     expect(filled).toContain("Sample detail.");
     expect(filled).toContain("Another");
@@ -137,5 +137,19 @@ describe("hobbies", () => {
     const r = await reply("what are his hobbies?");
     for (const h of about.hobbies) expect(r.text).toContain(h.name);
     expect((await reply("does he play sports?")).text).toContain(about.hobbies[0].name);
+  });
+});
+
+describe("outside of code", () => {
+  it("includes movies, music and online games, and your faith in the intro", () => {
+    const names = about.hobbies.map((h) => h.name);
+    for (const n of ["Movies", "K-dramas and series", "Music", "Online games"]) expect(names).toContain(n);
+    expect(about.hobbiesIntro).toContain("devoted Christian");
+  });
+
+  it("Adra's fallback answers questions about movies, music and games", async () => {
+    for (const q of ["does he like movies?", "does he watch kdramas?", "what music does he listen to?", "does he play games?"]) {
+      expect((await reply(q)).text).toContain("Online games");
+    }
   });
 });

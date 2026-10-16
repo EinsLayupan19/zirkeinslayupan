@@ -436,6 +436,9 @@ h1[tabindex="-1"]:focus { outline: none; }
 
 .about-hobbies { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .about-hobbies li.main { grid-column: 1 / -1; }
+/* An odd card out fills its row instead of leaving a gap (the favorite takes the first row on its own). */
+.about-hobbies li.main ~ li:last-child:nth-child(even),
+.about-hobbies:not(:has(.main)) li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .about-hobbies li { padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
 .about-hobbies .t { display: block; font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
 .about-hobbies .d { display: block; margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--muted); }

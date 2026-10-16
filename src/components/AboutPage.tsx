@@ -1,7 +1,7 @@
 import { about, profile, type About } from "../data";
 
 // /about: who you are, not what you've built (the home page covers the work). Everything comes from data.ts;
-// "My story" and "Hobbies" are left out until they have content.
+// "My story" and "Outside of code" are left out until they have content.
 export default function AboutPage({ content = about }: { content?: About }) {
   const { story, hobbiesIntro, hobbies } = content;
   const ordered = [...hobbies.filter((h) => h.main), ...hobbies.filter((h) => !h.main)];
@@ -41,7 +41,7 @@ export default function AboutPage({ content = about }: { content?: About }) {
 
       {hobbies.length ? (
         <section aria-labelledby="about-hobbies">
-          <h2 className="heading" id="about-hobbies">Hobbies</h2>
+          <h2 className="heading" id="about-hobbies">Outside of code</h2>
           {hobbiesIntro ? <p className="about-hobbies-intro">{hobbiesIntro}</p> : null}
           <ul className="about-hobbies">
             {ordered.map((h) => (

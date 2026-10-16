@@ -66,7 +66,7 @@ export async function reply(input: string): Promise<Reply> {
   if (has(q, /^(hi|hello|hey|yo|kumusta|hola)\b/))
     return { text: "Hi, I'm Adra. I can tell you about Eins's projects, tech stack, certifications and contact details." };
 
-  if (about.hobbies.length && has(q, /hobb|sport|basketball|badminton|volleyball|soccer|baseball|free time|fun|outside of/)) {
+  if (about.hobbies.length && has(q, /hobb|sport|basketball|badminton|volleyball|soccer|baseball|movie|film|series|drama|music|song|game|free time|fun|outside of/)) {
     // Names only: the details in data.ts are written in first person, and the About page shows them in full.
     const names = about.hobbies.map((h) => (h.main ? `${h.name} (his favorite)` : h.name));
     const list = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : names[0];

@@ -6,9 +6,9 @@ export const profile = {
   photo: "/photo.jpg",
   photoAlt: "Portrait of Zirk Eins B. Layupan, smiling, holding a whiteboard and a computer mouse",
   bio: [
-    "I build practical software, AI-powered tools, and data-driven systems.",
-    "I'm a third-year BSIT student at New Era University. I work on full-stack applications, AI automation, and data analytics, mostly personal and community projects.",
-    "I'd rather show a working project than describe one.",
+    "I'm a third-year BSIT student at New Era University focused on web development, data analytics, and AI engineering. I enjoy turning ideas into working software, and I keep learning new technologies along the way.",
+    "My work includes full-stack applications, AI automation, and data-driven projects. I focus on practical problems and on building systems that are simple and reliable.",
+    "I'd rather build something useful than talk about what I could build.",
   ],
   /** One line under your name, e.g. "Open to internships, 2026". Leave empty to hide it. */
   availability: "",
@@ -181,13 +181,13 @@ export type About = {
   education: { program: string; school: string; year: string };
   /** A few short paragraphs in your own words: how you got into tech, what you enjoy, what you want to do next. */
   story: string[];
-  /** One line above the hobbies. */
+  /** A line or two above the hobbies (the "Outside of code" section). */
   hobbiesIntro?: string;
   hobbies: Hobby[];
 };
 
 // The About page (/about) is about you, not your work: bio, your story, hobbies.
-// "My story" and "Hobbies" stay hidden until you add something, so only add what is true.
+// "My story" and "Outside of code" stay hidden until you add something, so only add what is true.
 export const about: About = {
   education: {
     program: "BS Information Technology",
@@ -195,15 +195,21 @@ export const about: About = {
     year: "Third year",
   },
   story: [
-    "I got into tech because of my uncle. He works in the field, and seeing how much he enjoys his job, and how well it pays, showed me what I wanted for myself: work I enjoy that also pays well.",
-    "Now that I'm studying IT, I really enjoy creating systems.",
+    "I first became interested in technology through my uncle, who works in the field. Seeing his work gave me a clearer idea of the career I wanted for myself: work I enjoy, that challenges me to grow, and that gives me the chance to build a good future.",
+    "When I started studying IT, I found that I genuinely enjoy creating systems and figuring out how technology can solve real problems.",
+    "Now I'm exploring where software, data, and AI meet through the projects I build. Each one is a chance to apply what I've learned, try new technologies, and become a better developer.",
+    "I'm still learning, but I'm building toward becoming someone who can create useful technology, not just understand it.",
   ],
-  hobbiesIntro: "I'm a sporty person and play almost every sport.",
+  hobbiesIntro: "I'm a devoted Christian and a sporty person. I play almost every sport, and I also love watching movies, series, and K-dramas, listening to music, and playing online games.",
   hobbies: [
     { name: "Basketball", detail: "I played varsity in senior high school at AMA Fairview.", main: true },
     { name: "Badminton", detail: "I play a lot." },
     { name: "Baseball" },
     { name: "Volleyball" },
     { name: "Soccer" },
+    { name: "Movies" },
+    { name: "K-dramas and series" },
+    { name: "Music" },
+    { name: "Online games" },
   ],
 };

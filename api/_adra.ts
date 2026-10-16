@@ -63,6 +63,7 @@ function systemPrompt(allowed: Map<string, string>): string {
     about: profile.bio,
     education: about.education,
     story: about.story.length ? about.story : undefined,
+    outsideOfCode: about.hobbiesIntro || undefined,
     hobbies: about.hobbies.length ? about.hobbies : undefined,
     availability: profile.availability || undefined,
     projects: projects.map((p) => ({
