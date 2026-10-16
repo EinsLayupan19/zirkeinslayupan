@@ -181,3 +181,23 @@ describe("no impossible combinations", () => {
     }
   });
 });
+
+describe("small screens", () => {
+  it("narrow game areas run slower, so obstacles stay on screen about as long as on a wide one", () => {
+    const crossTime = (width: number) => {
+      const g = createGame(width, H, 1);
+      press(g);
+      return width / g.speed;
+    };
+    expect(crossTime(340)).toBeGreaterThanOrEqual(crossTime(600) * 0.95);
+    const narrow = createGame(340, H, 1);
+    press(narrow);
+    for (let i = 0; i < 60 * 120; i++) { step(narrow, 1 / 60); narrow.phase = "running"; }
+    expect(narrow.speed).toBeLessThan(CONFIG.maxSpeed);
+  });
+
+  it("very narrow areas never drop below 55% speed, and wide ones never go above full speed", () => {
+    expect(createGame(200, H, 1).speed).toBeCloseTo(CONFIG.startSpeed * 0.55);
+    expect(createGame(1200, H, 1).speed).toBe(CONFIG.startSpeed);
+  });
+});

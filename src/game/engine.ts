@@ -23,7 +23,13 @@ export const CONFIG = {
   distancePerPoint: 10,
   squareSize: 12,
   hitInset: 3, // forgiving collisions: obstacle boxes shrink by this much
+  referenceWidth: 600, // game areas narrower than this run proportionally slower (down to 55%), for equal reaction time
 } as const;
+
+/** Speed multiplier for a game area of this width. */
+export function speedScale(width: number): number {
+  return Math.min(1, Math.max(0.55, width / CONFIG.referenceWidth));
+}
 
 type Player = { x: number; y: number; w: number; h: number; vy: number; onGround: boolean };
 
@@ -62,7 +68,7 @@ function freshRun(g: Pick<Game, "groundY" | "width">) {
   return {
     phase: "ready" as Phase,
     time: 0,
-    speed: CONFIG.startSpeed,
+    speed: CONFIG.startSpeed * speedScale(g.width),
     distance: 0,
     points: 0,
     player: { x: 48, y: g.groundY - 18, w: 18, h: 18, vy: 0, onGround: true },
@@ -143,7 +149,8 @@ export function step(g: Game, dt: number): GameEvent[] {
   const events: GameEvent[] = [];
 
   g.time += dt;
-  g.speed = Math.min(CONFIG.maxSpeed, g.speed + CONFIG.acceleration * dt);
+  const scale = speedScale(g.width);
+  g.speed = Math.min(CONFIG.maxSpeed * scale, g.speed + CONFIG.acceleration * scale * dt);
   const dx = g.speed * dt;
   g.distance += dx;
 
