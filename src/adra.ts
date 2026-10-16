@@ -102,7 +102,7 @@ export async function reply(input: string): Promise<Reply> {
     return { text: `Eins's code is on GitHub as ${links.githubHandle}.`, links: [{ label: "GitHub", href: links.github }] };
 
   if (has(q, /contact|email|mail|hire|reach|linkedin|message|touch/)) {
-    const l: { label: string; href: string }[] = [];
+    const l: { label: string; href: string }[] = [{ label: "Contact form", href: "/contact" }];
     if (links.email) l.push({ label: "Email", href: `mailto:${links.email}` });
     if (links.linkedin) l.push({ label: "LinkedIn", href: links.linkedin });
     l.push({ label: "GitHub", href: links.github });

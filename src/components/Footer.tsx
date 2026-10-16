@@ -2,7 +2,7 @@ import { links, profile } from "../data";
 
 export default function Footer() {
   return (
-    <footer id="contact">
+    <footer>
       <ul>
         <li>
           <a href={links.github} target="_blank" rel="noopener noreferrer">GitHub</a>

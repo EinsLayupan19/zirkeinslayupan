@@ -26,7 +26,14 @@ describe("Nav", () => {
     expect(anchors(html).some((a) => a.attrs.includes('href="/"') && a.text.includes(profile.name))).toBe(true);
     expect(find(html, "Work")?.attrs).toContain('href="#work"');
     expect(find(html, "About")?.attrs).toContain('href="/about"');
-    expect(find(html, "Contact")?.attrs).toContain('href="#contact"');
+    expect(find(html, "Contact")?.attrs).toContain('href="/contact"');
+  });
+
+  it("on the Contact page, marks Contact as current", () => {
+    stubBrowser("/contact");
+    const html = renderToStaticMarkup(<Nav route="contact" />);
+    expect(find(html, "Contact")?.attrs).toContain('aria-current="page"');
+    expect(find(html, "About")?.attrs).not.toContain("aria-current");
   });
 
   it("on the About page, marks About as current and sends Work back to the home page section", () => {
@@ -34,7 +41,8 @@ describe("Nav", () => {
     const html = renderToStaticMarkup(<Nav route="about" />);
     expect(find(html, "About")?.attrs).toContain('aria-current="page"');
     expect(find(html, "Work")?.attrs).toContain('href="/#work"');
-    expect(find(html, "Contact")?.attrs).toContain('href="#contact"');
+    expect(find(html, "Contact")?.attrs).toContain('href="/contact"');
+    expect(find(html, "Contact")?.attrs).not.toContain("aria-current");
   });
 
   it("shows Résumé only once a file is set", () => {
@@ -49,7 +57,7 @@ describe("Nav", () => {
 });
 
 describe("App uses the nav on every page", () => {
-  for (const path of ["/", "/about", "/nope"]) {
+  for (const path of ["/", "/about", "/contact", "/nope"]) {
     it(path, () => {
       stubBrowser(path);
       const html = renderToStaticMarkup(<App />);

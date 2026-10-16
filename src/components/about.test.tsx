@@ -17,6 +17,7 @@ describe("routes", () => {
     expect(routeOf("/")).toBe("home");
     expect(routeOf("/about")).toBe("about");
     expect(routeOf("/about/")).toBe("about");
+    expect(routeOf("/contact")).toBe("contact");
     expect(routeOf("/nope")).toBe("notfound");
   });
 });
@@ -99,7 +100,8 @@ describe("the app at each path", () => {
     const html = renderAt("/about");
     expect(html).toContain("About me");
     expect(html).toMatch(/<a (?=[^>]*class="brand")(?=[^>]*href="\/")[^>]*>/);
-    expect(html).toContain('id="contact"');
+    expect(html).toContain("<footer>");
+    expect(html).not.toContain('id="contact-name"'); // the form lives on /contact only
   });
 
   it("/ shows the portfolio", () => {

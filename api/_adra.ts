@@ -45,6 +45,7 @@ function knownLinks(): Map<string, string> {
   add(links.linkedin, "LinkedIn");
   add(links.github, "GitHub");
   add("/about", "About Eins");
+  add("/contact", "Contact form");
   add(links.resume, "Résumé");
   for (const p of projects) {
     add(p.demo, `${p.title} live site`);
