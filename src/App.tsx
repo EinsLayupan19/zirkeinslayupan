@@ -9,6 +9,7 @@ import Stack from "./components/Stack";
 import Footer from "./components/Footer";
 import ContactPage from "./components/ContactPage";
 import PlayPage from "./components/PlayPage";
+import PlaySection from "./components/PlaySection";
 import GreenSquares from "./components/GreenSquares";
 import Adra from "./components/Adra";
 import AboutPage from "./components/AboutPage";
@@ -51,6 +52,7 @@ export default function App() {
           <Achievements />
           <Work />
           <Contributions />
+          <PlaySection />
           <Certificates />
           <Stack />
         </>

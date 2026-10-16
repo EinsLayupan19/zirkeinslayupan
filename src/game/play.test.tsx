@@ -33,8 +33,16 @@ describe("Green Squares pages", () => {
     expect(html).toContain('role="application"');
   });
 
-  it("the home page does not load the game", () => {
-    expect(renderAt("/")).not.toContain('role="application"');
+  it("the home page has the game right after GitHub activity", () => {
+    const html = renderAt("/");
+    expect(html).toMatch(/<section[^>]*id="play"/);
+    expect(html.match(/role="application"/g)).toHaveLength(1);
+    const github = html.indexOf('id="github"');
+    const play = html.indexOf('id="play"');
+    const certs = html.indexOf('id="certifications"');
+    expect(github).toBeGreaterThan(-1);
+    expect(play).toBeGreaterThan(github);
+    expect(certs).toBeGreaterThan(play);
   });
 
   it("the footer links to the game", () => {
