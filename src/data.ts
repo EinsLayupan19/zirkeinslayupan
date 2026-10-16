@@ -163,10 +163,16 @@ export const stackGroups: { label: string; items: string[] }[] = [
   { label: "Backend", items: ["Node.js", "Express", "FastAPI"] },
   { label: "Data", items: ["DuckDB", "SQLite", "MongoDB", "Supabase"] },
   { label: "AI and automation", items: ["Gemini API", "OpenAI API", "Ollama", "n8n"] },
-  { label: "Shipping", items: ["Vercel", "GitHub"] },
+  { label: "Tools", items: ["Vercel", "GitHub"] },
 ];
 
 export const stack: string[] = stackGroups.flatMap((g) => g.items);
+
+// How you work, shown under Skills. Only add what is true.
+export const softSkills: { name: string; detail?: string }[] = [
+  { name: "Teamwork", detail: "I worked with a team on the HR System, where I handled QA." },
+  { name: "Willing to learn", detail: "I'm always open to learning new tools and technologies." },
+];
 
 // The About page (/about). Sections with an empty list stay hidden, so add only what is true.
 export type Hobby = {

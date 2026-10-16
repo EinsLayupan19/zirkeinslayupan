@@ -5,7 +5,7 @@ import Achievements from "./components/Achievements";
 import Work from "./components/Work";
 import Contributions from "./components/Contributions";
 import Certificates from "./components/Certificates";
-import Stack from "./components/Stack";
+import Skills from "./components/Skills";
 import Footer from "./components/Footer";
 import ContactPage from "./components/ContactPage";
 import PlayPage from "./components/PlayPage";
@@ -54,7 +54,7 @@ export default function App() {
           <Contributions />
           <PlaySection />
           <Certificates />
-          <Stack />
+          <Skills />
         </>
       ) : route === "about" ? (
         <AboutPage />

@@ -4,7 +4,7 @@
 //
 // Same rules as InsightFlow's GeminiProvider: the key travels in the x-goog-api-key header, never the URL;
 // errors never echo the key or Google's raw response; one retry when Gemini says it is busy.
-import { about, achievements, certificates, links, profile, projects, stack } from "../src/data";
+import { about, achievements, certificates, links, profile, projects, softSkills, stack } from "../src/data";
 
 export type AdraEnv = { GEMINI_API_KEY?: string; GEMINI_MODEL?: string };
 type Link = { label: string; href: string };
@@ -78,6 +78,7 @@ function systemPrompt(allowed: Map<string, string>): string {
     achievements,
     certificates,
     stack,
+    softSkills,
     contact: { email: links.email, linkedin: links.linkedin, github: links.github, resume: links.resume || undefined },
   };
   return [

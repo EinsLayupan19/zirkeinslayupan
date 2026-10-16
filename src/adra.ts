@@ -1,7 +1,7 @@
 // Adra's brain in the browser. `ask()` sends the conversation to /api/adra (Gemini, see api/_adra.ts).
 // When that isn't available (no API key set, offline, rate-limited) she falls back to `reply()`:
 // keyword matching over the site's own data in data.ts, so she only says things already on the page.
-import { about, achievements, categories, certificates, links, profile, projects, stack } from "./data";
+import { about, achievements, categories, certificates, links, profile, projects, softSkills, stack } from "./data";
 
 export type Reply = { text: string; links?: { label: string; href: string }[] };
 
@@ -88,7 +88,7 @@ export async function reply(input: string): Promise<Reply> {
   }
 
   if (has(q, /stack|tech|tool|skill|language|framework|use\b/))
-    return { text: `Eins's stack: ${stack.join(", ")}.` };
+    return { text: `Eins's skills: ${stack.join(", ")}. He also brings ${softSkills.map((s) => s.name).join(" and ")}.` };
 
   if (has(q, /cert|course|credential|badge/)) {
     if (!certificates.length) return { text: "No certifications listed yet." };

@@ -17,7 +17,7 @@ Everything lives in `src/data.ts`:
 - `profile.availability`: one line under your name, e.g. "Open to internships, 2026"
 - `projects`: add `demo` (live site) or `repo` (code) to make a card clickable, and `image` for a screenshot
 - `achievements`: add real entries only; the "Coming soon" card hides itself once the list has items
-- `stackGroups`: your tools, shown as one list on the home page
+- `stackGroups` and `softSkills`: the Skills section on the home page (technical skills by group, then how you work)
 - `about`: the About page (`/about`), which is about you, not your work. Add `story` paragraphs and `hobbies` (`{ name, detail? }`); each section stays hidden until it has something
 
 ## Pages
